@@ -8,11 +8,12 @@ public class Main {
         Random rand=new Random();
 
         for(int i=0;i<2500;i++){
-            List list=new List();
+
             for(int j=0;j<5;j++){
-                list.add("Duh",rand.nextInt(26)+1);
+                Pair<String> pair=new Pair(rand.nextInt(26)+1,"Duh");
+                table.insert(pair);
             }
-            table.insert(list);
+
         }
     System.out.println(table.getCollisions());
         boolean[] random=new boolean[10000];

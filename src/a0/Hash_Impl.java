@@ -1,40 +1,35 @@
 package a0;
 import java.lang.Math;
-public class Hash_Impl<T> implements HashTable{
+public class Hash_Impl<T> implements HashTable<T>{
 
     private int size=100000000;//size of hash table
     private int collisions=0;//keeps track of the number of collisions as data is added
-    private DoubleList<T>[] array=new DoubleList[size];//this is the array in which data is added
+    private List<Pair<T>>[] array=new List[size];//this is the array in which data is added
     public Hash_Impl(){
 
     }
+    //array of lists of pairs
 
+    public void insert(Pair<T> pair){//finds the hash value and puts the pair there
+        int index=hash(pair.getKey());//gets the value from the hash function
 
-    public void insert(List list){
-        int index=hash(list);
-        if(array[index]==null){
-            DoubleList chain=new DoubleList();
-            chain.add(list);
-            array[index]=chain;
+        if(array[index]==null){//if the space in the array is fresh
+            List<Pair<T>> chain=new List();//create a new list
+
+            chain.add(pair);//add the value to the list (it will be by itself)
+            array[index]=chain;//make the list what the array points to
         }
-        else{
-            array[index].add(list);
-            collisions++;
+        else{//there is a collision and a list already exists
+            array[index].add(pair);//add the value to the existing list
+            collisions++;//keep track of this new collision
         }
     }
 
 
 
-    private int hash(List list){
-        Node currentNode=list.getHead();//gets the head
-        int intermediateNumber= 31+currentNode.getKey();//adds 31 to the key
-        currentNode=currentNode.getNext();
-        while(currentNode!=null){//keep repeating the intermediate number by 31 and adding the next key
+    private int hash(int key){
 
-            intermediateNumber=31*intermediateNumber+ currentNode.getKey();
-            currentNode=currentNode.getNext();
-        }
-        double m=100000*Math.log(intermediateNumber)-Math.floor(100000*Math.log(intermediateNumber));
+        double m=100000*Math.log(key)-Math.floor(100000*Math.log(key));
         //1: take the log of this number
         //2: move the decimal point 5 spots to the right
         //3: delete everything to the left of the decimal point
@@ -50,5 +45,18 @@ public class Hash_Impl<T> implements HashTable{
     public int getCollisions(){
         return collisions;
     }//for measuring how good the hash function is
+    public T get(int key){
+        int location=hash(key);
+        Node<Pair<T>> currentNode=array[location].getHead();
+        if(currentNode.getValue().getKey()==key){return currentNode.getValue().getValue();}
+        while(true){
+        try{currentNode=currentNode.getNext();
+            if(currentNode.getValue().getKey()==key){return currentNode.getValue().getValue();}}
+        catch(NullPointerException e){
+            System.out.println("Not here");
+            return null;
+        }
 
+        }
+    }
 }

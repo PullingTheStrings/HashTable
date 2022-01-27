@@ -2,19 +2,19 @@ package a0;
 
 public class List<T> {
 
-    private Node head;
-    private Node tail;
+    private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     public List(){
         size=0;
     }
-    public void add(T value,int key){
-        Node<T> node=new Node(value,key);
+    public void add(T thing){
+        Node<T> node=new Node(thing);
         addNode(node);
     }
 
-    private void addNode(Node node){
+    public void addNode(Node node){
         if(head==null){//if the list is empty
             head=node;
             tail=node;//both the head and tail will be that node

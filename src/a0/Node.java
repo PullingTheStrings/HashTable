@@ -1,16 +1,17 @@
 package a0;
 
 public class Node<T> {
-    private int key;
+
 
 
 
     private T value;
     private Node next;
 
-    public Node(T value, int key){
+
+    public Node(T value){
         this.value=value;
-        this.key=key;
+
     }
     public T getValue(){
         return value;
@@ -18,17 +19,15 @@ public class Node<T> {
     public void setValue(T value){
         this.value=value;
     }
-    public Node getNext(){
-        return next;
-    }
-    public void setNext(Node node){
-        next=node;
-    }
-    public int getKey() {
-        return key;
+
+    public Node getNext() {
+        try{return next;}
+        catch(Exception e){
+            return null;
+        }
     }
 
-    public void setKey(int key) {
-        this.key = key;
+    public void setNext(Node next) {
+        this.next = next;
     }
 }
