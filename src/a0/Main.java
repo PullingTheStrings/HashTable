@@ -4,13 +4,13 @@ public class Main {
     public static void main(String[] args) {
 
 
-        HashTable table=new Hash_Impl();
+        HashTable<String> table=new Hash_Impl();
         Random rand=new Random();
 
         for(int i=0;i<2500;i++){
             List list=new List();
             for(int j=0;j<5;j++){
-                list.add(rand.nextInt(26)+1);
+                list.add("Duh",rand.nextInt(26)+1);
             }
             table.insert(list);
         }
@@ -25,7 +25,8 @@ public class Main {
             else{
                 collisions++;
             }
-        }
+        }//this block of code will randomly distribute 2500 trues in an array of 10000
+        //it also records the number of collisions (when it tries to make an already true slot true)
         System.out.println(collisions);
 
     }

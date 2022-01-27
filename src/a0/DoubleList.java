@@ -1,19 +1,19 @@
 package a0;
 
-public class DoubleList {
-    private ListNode head;
-    private ListNode tail;
+public class DoubleList<T> {
+    private ListNode<T> head;
+    private ListNode<T> tail;
     private int size;
 
     public DoubleList(){
         size=0;
     }
     public void add(List list){
-        ListNode node=new ListNode(list);
+        ListNode<T> node=new ListNode(list);
         addNode(node);
     }
 
-    private void addNode(ListNode node){
+    private void addNode(ListNode<T> node){
         if(head==null){
             head=node;
             tail=node;
