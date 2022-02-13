@@ -1,4 +1,4 @@
-package a0;
+package ElliotHash;
 import java.lang.Math;
 public class Hash_Impl<T> implements HashTable<T>{
 
@@ -28,11 +28,12 @@ public class Hash_Impl<T> implements HashTable<T>{
 
 
     private int hash(int key){
-
-        double m=100000*Math.log(key)-Math.floor(100000*Math.log(key));
-        //1: take the log of this number
-        //2: move the decimal point 5 spots to the right
-        //3: delete everything to the left of the decimal point
+        double log=Math.log(Math.abs(key)+1);
+        double m=100000*log-Math.floor(100000*log);
+        //1: take the absolute value of the number and add 1
+        //2:take the log of this number
+        //3: move the decimal point 5 spots to the right
+        //4: delete everything to the left of the decimal point
         int finalNumber=0;
         int digits=4;//the number of digits that we take from this number
         for(int digit=0;digit<digits;digit++){
@@ -47,15 +48,28 @@ public class Hash_Impl<T> implements HashTable<T>{
     }//for measuring how good the hash function is
     public T get(int key){
         int location=hash(key);
-        Node<Pair<T>> currentNode=array[location].getHead();
-        if(currentNode.getValue().getKey()==key){return currentNode.getValue().getValue();}
-        while(true){
-        try{currentNode=currentNode.getNext();
-            if(currentNode.getValue().getKey()==key){return currentNode.getValue().getValue();}}
-        catch(NullPointerException e){
-            System.out.println("Not here");
+        /*System.out.println(key+" is located at "+location);
+        for(int i=1;i<5;i++){
+            System.out.println(key+i+" is located at "+hash(key+i));
+        }*/
+        Node<Pair<T>> currentNode;
+        try{currentNode=array[location].getHead();}//set the current node to be the head of the chain
+        catch(NullPointerException e){//if there is no chain
+            //System.out.println("Not here");
             return null;
         }
+        //if the program makes it to this point then there will be a chain
+        if(currentNode.getValue().getKey()==key){return currentNode.getValue().getValue();}
+        //see if the head matches and enter the loop otherwise
+        while(true){//this loop will keep cycling through nodes of the list until the one with the
+            //matching key is found
+        currentNode=currentNode.getNext();
+            try{if(currentNode.getValue().getKey()==key){return currentNode.getValue().getValue();}
+      } catch (RuntimeException e) {
+
+        return null;
+                }
+
 
         }
     }
