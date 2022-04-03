@@ -83,4 +83,7 @@ public class Hash_Impl<T> implements HashTable<T> {
     }
     throw new RuntimeException("This line shouldn't have been reached");
   }
+  private void resize(){
+    size=size*10;
+  }
 }
