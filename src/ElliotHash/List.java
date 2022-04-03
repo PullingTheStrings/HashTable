@@ -1,6 +1,8 @@
 package ElliotHash;
 
-public class List<T> {
+import java.util.Iterator;
+
+public class List<T> implements Iterable<T>{
 
     private Node<T> head;
     private Node<T> tail;
@@ -32,6 +34,16 @@ public class List<T> {
     public Node getTail(){
         return tail;
     }//getters for head and tail
+
+    @Override
+    public Iterator<T> iterator(){
+        return new ListIterator<T>(this);
+    }
+
+    @Override
+    public List<T> clone(){//makes the clone method for Lists public
+        return clone();
+    }
 
 
 }
