@@ -14,8 +14,8 @@ public class Main {
         int index = rand.nextInt(size); // pick a random number between 1 and 10000
         if (random1[index] == false) { // if the number hasn't been taken
           random1[index] = true; // indicate that the number is now taken
-          Pair<String> pair = new Pair(index, "Duh"); // use that number as a key for an insert
-          table.insert(pair);
+
+          table.put(index, "Duh");
           bool = false; // get out of the while loop
         }
       }
