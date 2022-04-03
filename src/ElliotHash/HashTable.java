@@ -2,7 +2,7 @@ package ElliotHash;
 
 public interface HashTable<T> {
 
-    void insert(Pair<T> pair);
+    void put(int key, T value);
     T get(int key);
 
     int getCollisions();
