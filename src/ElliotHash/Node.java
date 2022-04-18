@@ -30,4 +30,11 @@ public class Node<T> {
     public void setNext(Node next) {
         this.next = next;
     }
+    @Override
+    public boolean equals(Object node){
+        if(!(node instanceof Node)){return false;
+    } else {
+      return value.equals(((Node) node).getValue()) && next.equals(((Node)node).getNext());
+        }
+    }
 }

@@ -2,23 +2,23 @@ package ElliotHash;
 
 import java.util.Objects;
 
-public class Pair<T> {
+public class Pair<S,T> {
 
-    private Object key;
+    private S key;
     private T value;
 
-    public Pair(Object key, T value) {
+    public Pair(S key, T value) {
 
-        this.key = key.hashCode();
+        this.key = key;
         this.value = value;
     }
 
-    public Object getKey() {
+    public S getKey() {
         return key;
     }
 
-    public void setKey(Object key) {
-        this.key = key.hashCode();
+    public void setKey(S key) {
+        this.key = key;
     }
 
     public T getValue() {

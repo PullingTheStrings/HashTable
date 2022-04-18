@@ -2,12 +2,12 @@ package ElliotHash;
 
 import java.lang.Math;
 
-public class Hash_Impl<T> implements HashTable<T> {
+public class Hash_Impl<S,T> implements HashTable<S,T> {
 
   private int size = 100000000; // size of hash table
   private double decimal=5;
   private int collisions = 0; // keeps track of the number of collisions as data is added
-  private List<Pair<T>>[] array = new List[size]; // this is the array in which data is added
+  private List<Pair<S,T>>[] array = new List[size]; // this is the array in which data is added
 
   public Hash_Impl() {}
 
@@ -15,19 +15,19 @@ public class Hash_Impl<T> implements HashTable<T> {
 
   @Override
   public void put(
-      Object key, T value) { // makes a pair with the key and the value and adds it to the array
-    Pair<T> pair = new Pair<T>(key, value);
+      S key, T value) { // makes a pair with the key and the value and adds it to the array
+    Pair<S,T> pair = new Pair<S,T>(key, value);
     // the reason why a pair is needed is that the key and value must always be linked
     // otherwise, the data structure would have no way of differentiating between the same value
     // hashed with different keys
     insert(pair);
   }
 
-  private void insert(Pair<T> pair) { // finds the hash value and puts the pair there
+  private void insert(Pair<S,T> pair) { // finds the hash value and puts the pair there
     int index = hash(pair.getKey().hashCode()); // gets the value from the hash function
 
     if (array[index] == null) { // if the space in the array is fresh
-      List<Pair<T>> chain = new List(); // create a new list
+      List<Pair<S,T>> chain = new List(); // create a new list
 
       chain.add(pair); // add the value to the list (it will be by itself)
       array[index] = chain; // make the list what the array points to
@@ -59,12 +59,12 @@ public class Hash_Impl<T> implements HashTable<T> {
     return collisions;
   } // for measuring how good the hash function is
   @Override
-  public T get(Object key) {
+  public T get(S key) {
     int location = hash(key.hashCode());
-    List<Pair<T>> list=array[location];
+    List<Pair<S,T>> list=array[location];
 
 
-    Node<Pair<T>> currentNode;
+    Node<Pair<S,T>> currentNode;
     try {
       currentNode = array[location].getHead();
     } // set the current node to be the head of the chain
@@ -77,7 +77,7 @@ public class Hash_Impl<T> implements HashTable<T> {
       return currentNode.getValue().getValue();
     }
     // see if the head matches and enter the loop otherwise
-    for(Pair<T> thing:list){
+    for(Pair<S,T> thing:list){
       if(thing.getKey()==key){
         return thing.getValue();
       }

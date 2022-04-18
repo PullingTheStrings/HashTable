@@ -1,5 +1,6 @@
 package ElliotHash;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -12,7 +13,10 @@ public class ListIterator<T> implements Iterator<T> {
     if (list == null) {
       throw new IllegalArgumentException("List cannot be null");
     }
-    this.list = list.clone();
+    try{this.list = list.clone();}
+    catch(CloneNotSupportedException e){
+      throw new RuntimeException("Unable to clone");
+    }
     currentNode = this.list.getHead();
 
   }

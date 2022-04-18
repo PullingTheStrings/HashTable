@@ -11,6 +11,11 @@ public class List<T> implements Iterable<T>{
     public List(){
         size=0;
     }
+    private List(Node<T> head,Node<T> tail,int size){//this constructor is private because it's only supposed to be used in the clone method
+        this.head=head;
+        this.tail=tail;
+        this.size=size;
+    }
     public void add(T thing){
         Node<T> node=new Node(thing);
         addNode(node);
@@ -41,8 +46,8 @@ public class List<T> implements Iterable<T>{
     }
 
     @Override
-    public List<T> clone(){//makes the clone method for Lists public
-        return clone();
+    public List<T> clone() throws CloneNotSupportedException{//makes the clone method for Lists public
+        return new List<T>(head,tail,size);
     }
 
 

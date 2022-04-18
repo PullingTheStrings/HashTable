@@ -1,9 +1,9 @@
 package ElliotHash;
 
-public interface HashTable<T> {
+public interface HashTable<S,T> {
 
-    void put(Object key, T value);
-    T get(Object key);
+    void put(S key, T value);
+    T get(S key);
 
     int getCollisions();
 
