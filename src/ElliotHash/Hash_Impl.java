@@ -15,7 +15,7 @@ public class Hash_Impl<T> implements HashTable<T> {
 
   @Override
   public void put(
-      int key, T value) { // makes a pair with the key and the value and adds it to the array
+      Object key, T value) { // makes a pair with the key and the value and adds it to the array
     Pair<T> pair = new Pair<T>(key, value);
     // the reason why a pair is needed is that the key and value must always be linked
     // otherwise, the data structure would have no way of differentiating between the same value
@@ -24,7 +24,7 @@ public class Hash_Impl<T> implements HashTable<T> {
   }
 
   private void insert(Pair<T> pair) { // finds the hash value and puts the pair there
-    int index = hash(pair.getKey()); // gets the value from the hash function
+    int index = hash(pair.getKey().hashCode()); // gets the value from the hash function
 
     if (array[index] == null) { // if the space in the array is fresh
       List<Pair<T>> chain = new List(); // create a new list
@@ -54,12 +54,13 @@ public class Hash_Impl<T> implements HashTable<T> {
     return finalNumber; // this number will be the array index slot
   }
 
+
   public int getCollisions() {
     return collisions;
   } // for measuring how good the hash function is
-
-  public T get(int key) {
-    int location = hash(key);
+  @Override
+  public T get(Object key) {
+    int location = hash(key.hashCode());
     List<Pair<T>> list=array[location];
 
 
@@ -72,7 +73,7 @@ public class Hash_Impl<T> implements HashTable<T> {
       return null;
     }
     // if the program makes it to this point then there will be a chain
-    if (currentNode.getValue().getKey() == key) {
+    if (currentNode.getValue().getKey().equals(key)) {
       return currentNode.getValue().getValue();
     }
     // see if the head matches and enter the loop otherwise
