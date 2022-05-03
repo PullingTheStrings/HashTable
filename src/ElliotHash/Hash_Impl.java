@@ -69,7 +69,7 @@ public class Hash_Impl<S,T> implements HashTable<S,T> {
 
     Node<Pair<S,T>> currentNode;
     try {
-      currentNode = array[location].getHead();
+      currentNode = list.getHead();
     } // set the current node to be the head of the chain
     catch (NullPointerException e) { // if there is no chain
       // System.out.println("Not here");
@@ -81,7 +81,7 @@ public class Hash_Impl<S,T> implements HashTable<S,T> {
     }
     // see if the head matches and enter the loop otherwise
     for(Pair<S,T> thing:list){
-      if(thing.getKey()==key){
+      if(thing.getKey().equals(key)){
         return thing.getValue();
       }
     }
