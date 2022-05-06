@@ -1,8 +1,8 @@
-package ElliotHash;
+package PersonalHash;
 import java.util.Random;
 
 public class Main {
-
+//the main class is for testing the efficacy of this hash function
 
 
   public static void main(String[] args) {
@@ -11,6 +11,13 @@ public class Main {
 
 }
 public static void getStatistics(int size,int simulations){
+    /*
+    This method creates and fills two arrays of the same size in two different ways.
+    The first one makes a list of distinct integers and then hashes each of them using the hash table.
+    The second one randomly generates integers and puts each one in at the corresponding array index.
+    The method also calculates some statistics and prints them to the console.
+
+     */
   int trials = 0;
   int random = 0;
   int hash = 0;

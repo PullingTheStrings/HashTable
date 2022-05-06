@@ -1,4 +1,4 @@
-package ElliotHash;
+package PersonalHash;
 
 public class LimitedHashTableImpl<T> implements LimitedHashTable<T> {
     private int size; // size of hash table

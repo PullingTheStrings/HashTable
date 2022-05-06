@@ -1,4 +1,4 @@
-package ElliotHash;
+package PersonalHash;
 
 public class ListNode<T> {
     private List<T> value;

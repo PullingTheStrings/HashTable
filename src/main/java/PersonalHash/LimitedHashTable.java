@@ -1,4 +1,4 @@
-package ElliotHash;
+package PersonalHash;
 
 public interface LimitedHashTable<T> {
     void put(T value);

@@ -1,4 +1,4 @@
-package ElliotHash;
+package PersonalHash;
 
 public class HashFunction {
     static int hash(int key,double decimal,int size){
@@ -8,6 +8,7 @@ public class HashFunction {
         // 2:take the log of this number
         // 3: move the decimal point <decimal> spots to the right
         // 4: delete everything to the left of the decimal point
+        // 5: take as many digits as needed and this is the result of the function
         int finalNumber = 0;
         int digits = (int) Math.floor(Math.log10(size)); // the number of digits that we take from this number
         for (int digit = 0; digit < digits; digit++) {

@@ -1,4 +1,4 @@
-package ElliotHash;
+package PersonalHash;
 
 public class DoubleList<T> {
     private ListNode<T> head;

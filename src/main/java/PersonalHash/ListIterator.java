@@ -1,6 +1,5 @@
-package ElliotHash;
+package PersonalHash;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

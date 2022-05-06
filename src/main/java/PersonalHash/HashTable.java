@@ -1,4 +1,4 @@
-package ElliotHash;
+package PersonalHash;
 
 public interface HashTable<S,T> {
 

@@ -1,4 +1,4 @@
-package ElliotHash;
+package PersonalHash;
 
 import java.util.Iterator;
 
@@ -29,8 +29,10 @@ public class List<T> implements Iterable<T> {
   }
 
   public void remove(T thing) {
-    Node<T> node = new Node(thing);
-    removeNode(node);
+    if (thing != null) {
+      Node<T> node = new Node(thing);
+      removeNode(node);
+    }
   }
 
   private void addNode(Node node) {

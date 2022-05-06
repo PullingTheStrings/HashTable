@@ -40,7 +40,7 @@ Below the task 1 comment you will be writing your first Java method. The method'
 Task 2 is to print the return value of the sayHello method you just wrote. An example of how to print is shown above where the Java version is printed. Now run
 your program and you should see Hello World printed at the bottom of the screen below the Java version.
 
-Once you have this working you are ready to submit ElliotHash!
+Once you have this working you are ready to submit PersonalHash!
 
 ## Submission
 To submit to Gradescope you first must push your code. To do this open up the terminal in IntelliJ. You should see a 
