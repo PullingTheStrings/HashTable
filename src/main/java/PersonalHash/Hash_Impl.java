@@ -16,7 +16,7 @@ public class Hash_Impl<S,T> implements HashTable<S,T> {
     if(size<100){
       throw new IllegalArgumentException(); // let's not deal with arrays that are unnecessarily small
     }
-    this.size=(int)Math.pow(10,Math.ceil((Math.log10(size))));
+    this.size=(int)Math.pow(10,Math.ceil((Math.log10(size))));//round up the size to the nearest power of 10 and make that the size of the array
     array= new List[size];
     keySet=new Set<>();
     valueSet=new Set<>();

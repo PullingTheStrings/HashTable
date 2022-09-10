@@ -12,64 +12,77 @@ public class Main {
 }
 public static void getStatistics(int size,int simulations){
     /*
-    This method creates and fills two arrays of the same size in two different ways.
+    This method performs the following tasks many times (specified by the parameter simulations)
+    and then generates some statistics.
+    Tasks:
+    Create and fill two arrays of the same size in two different ways.
     The first one makes a list of distinct integers and then hashes each of them using the hash table.
     The second one randomly generates integers and puts each one in at the corresponding array index.
-    The method also calculates some statistics and prints them to the console.
+
 
      */
-  int trials = 0;
-  int random = 0;
-  int hash = 0;
+  int trials = 0; //keeps track of the number of trials that have been run
+  int random = 0; //keeps track of the total number of collisions that occur in the second (random) array across all trials
+  int hash = 0;   //keeps track of the total number of collisions that occur in the first (hash) array across all trials
 
-  int hashMin=size;
+  int hashMin=size; //keeps track of the minimum number of collisions for the first (hash) array
+  // that occur in a single trial among the trials already run
   int hashMax=0;
+  //keeps track of the maximum number of collisions for the first (hash) array
+  // that occur in a single trial among the trials already run
   int randomMin=size;
+  //keeps track of the minimum number of collisions for the second (random) array
+  // that occur in a single trial among the trials already run
   int randomMax=0;
+//keeps track of the maximum number of collisions for the second (random) array
+  // that occur in a single trial among the trials already run
+  int trueSize=(int)Math.pow(10,Math.ceil((Math.log10(size))));
+  //this will be the size of the arrays (round up to the next power of 10)
 
-
-  if((int)Math.pow(10,Math.ceil((Math.log10(size))))!=10000){
-    throw new ArithmeticException();
-  }
-  for (int x = 0; x < simulations; x++) {
-    HashTable<String, String> table = new Hash_Impl(size);
+  for (int x = 0; x < simulations; x++) {//loop that performs the proper number of simulations
+    HashTable<String, String> table = new Hash_Impl(trueSize);
 
     Random rand = new Random();
-    boolean[] random1 = new boolean[size];
-    for (int i = 0; i < size/4; i++) {
+    boolean[] hashArray = new boolean[trueSize];
+    //We will now make some values in this array true.
+    //Then we will hash the index values of all the true values and count the collisions.
+    for (int i = 0; i < size/4; i++) {//makes some values of the initial array true
       boolean b=true;
-      while(b){
+      while(b){//ensures that these true values are distinct by making b false only after
+        //we find a value to flip from false to true
         int index=rand.nextInt(size);
-        if (random1[index] == false) {
-          random1[index]=true;
-          table.put("" + index, "" + index);
+        if (hashArray[index] == false) {
+          hashArray[index]=true;
+          table.put("" + index, "" + index);//Once the value has been made true, we hash that index.
           b=false;
         }
       }
     }
-    //System.out.println(table.getCollisions());
-    hash=hash+table.getCollisions();
-    hashMin=Math.min(hashMin,table.getCollisions());
-    hashMax=Math.max(hashMax,table.getCollisions());
-    boolean[] random2 = new boolean[size];
+
+    hash=hash+table.getCollisions();//gets the number of collisions caused by all that hashing and adds it to the tally
+    hashMin=Math.min(hashMin,table.getCollisions());//updates minimum variable (if needed)
+    hashMax=Math.max(hashMax,table.getCollisions());//updates maximum variable (if needed)
+    boolean[] randomArray = new boolean[trueSize];
     int collisions = 0;
+    //We will now make some values in this array true.
+    //However, we will naively assume that we are always flipping values from false to true.
+    //In reality, this doesn't happen, so we keep track of the number of times we "flip" a value
+    //that is already true and count those as collisions.
     for (int i = 0; i < size/4; i++) {
       int index = rand.nextInt(size);
-      if (random2[index] == false) {
-        random2[index] = true;
+      if (randomArray[index] == false) {//false to true
+        randomArray[index] = true;
 
-      } else {
+      } else {//true to true (collision)
         collisions++;
       }
-    } // this block of code will randomly distribute 2500 trues in an array of 10000
-    // it also records the number of collisions (when it tries to make an already true slot true)
-    //System.out.println(collisions);
-    //System.out.println(table.get("" + rand.nextInt(size)));
-    random=random+collisions;
-    randomMin=Math.min(randomMin,collisions);
-    randomMax=Math.max(randomMax,collisions);
-    trials++;
+    }
+    random=random+collisions;//gets the number of collisions caused and adds it to the tally
+    randomMin=Math.min(randomMin,collisions);//updates the minimum variable (if needed)
+    randomMax=Math.max(randomMax,collisions);//updates the maximum variable (if needed)
+    trials++;//updates the number of trials performed
   }
+  //the lines below print the statistics
   System.out.println("Average hash collisions: "+hash/trials);
   System.out.println("Average random collisions: "+random/trials);
   System.out.println("Minimum hash collisions: "+hashMin);
