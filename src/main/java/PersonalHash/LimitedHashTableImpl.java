@@ -50,8 +50,8 @@ public class LimitedHashTableImpl<T> implements LimitedHashTable<T> {
         if(key==null){
             throw new IllegalArgumentException();
         }
-        List<T> list=array[hash(key.hashCode())];
-
+        List<T> list=array[hash(key.hashCode())]; //use the hash function to find where the value should be
+        //and store this as list
 
         Node<T> currentNode;
         try {

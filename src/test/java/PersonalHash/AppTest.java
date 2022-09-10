@@ -11,6 +11,11 @@ public class AppTest {
   public void constructor() {
     HashTable<String, String> table = setup();
     table.put("Elliot", "toillE");
+    table.remove("toillE");
+    //assertTrue(table.keySet().contains("Elliot"));
+    table.put("Elliot","toillE");
+    assertEquals(table.getCollisions(),0);
+
     assertEquals(table.keySet().size(),1);
     assertEquals(table.valueSet().size(),1);
     try{

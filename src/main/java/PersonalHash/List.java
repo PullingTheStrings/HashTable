@@ -32,6 +32,7 @@ public class List<T> implements Iterable<T> {
     if (thing != null) {
       Node<T> node = new Node(thing);
       removeNode(node);
+      size--;
     }
   }
 

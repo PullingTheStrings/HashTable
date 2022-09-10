@@ -16,12 +16,10 @@ public class Set<T> implements Iterable<T> {
 
   public void put(T thing) {
 
-    if (!table.contains(thing)) {
+    if (!contains(thing)) {
       table.put(thing);
       list.add(thing);
-      if (contains(thing)) {
-        size++;
-      }
+      size++;
     }
   }
 
