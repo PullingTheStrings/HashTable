@@ -5,30 +5,32 @@ public class DoubleList<T> {
     private ListNode<T> tail;
     private int size;
 
-    public DoubleList(){
-        size=0;
+    public DoubleList() {
+        size = 0;
     }
-    public void add(List list){
-        ListNode<T> node=new ListNode(list);
+
+    public void add(List list) {
+        ListNode<T> node = new ListNode(list);
         addNode(node);
     }
 
-    private void addNode(ListNode<T> node){
-        if(head==null){
-            head=node;
-            tail=node;
+    private void addNode(ListNode<T> node) {
+        if (head == null) {
+            head = node;
+            tail = node;
             size++;
-        }
-        else{
+        } else {
             tail.setNext(node);
-            tail=node;
+            tail = node;
             size++;
         }
     }
-    public ListNode getHead(){
+
+    public ListNode getHead() {
         return head;
     }
-    public ListNode getTail(){
+
+    public ListNode getTail() {
         return tail;
     }
 }

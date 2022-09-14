@@ -1,6 +1,6 @@
 package PersonalHash;
 
-public class Pair<S,T> {
+public class Pair<S, T> {
 
     private S key;
     private T value;
@@ -26,24 +26,25 @@ public class Pair<S,T> {
     public void setValue(T value) {
         this.value = value;
     }
+
     @Override
-    public boolean equals(Object o){
-        if(!(o instanceof Pair)||o==null){
+    public boolean equals(Object o) {
+        if (!(o instanceof Pair) || o == null) {
             return false;
         }
-        Pair pair=(Pair) o;
+        Pair pair = (Pair) o;
         boolean equalKeys;
-        try{
-            equalKeys=pair.getKey().equals(key);
-        }catch(NullPointerException e){
-            return key==null;
+        try {
+            equalKeys = pair.getKey().equals(key);
+        } catch (NullPointerException e) {
+            return key == null;
         }
         boolean equalValues;
-        try{
-            equalValues=pair.getValue().equals(value);
-        }catch(NullPointerException e){
-            return value==null;
+        try {
+            equalValues = pair.getValue().equals(value);
+        } catch (NullPointerException e) {
+            return value == null;
         }
-        return equalKeys&&equalValues;
+        return equalKeys && equalValues;
     }
 }

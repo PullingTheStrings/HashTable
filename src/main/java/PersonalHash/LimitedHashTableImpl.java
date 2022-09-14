@@ -2,17 +2,18 @@ package PersonalHash;
 
 public class LimitedHashTableImpl<T> implements LimitedHashTable<T> {
     private int size; // size of hash table
-    private double decimal=5;
+    private double decimal = 5;
     private List<T>[] array;  // this is the array in which data is added
+
     public LimitedHashTableImpl(int size) {
-        this.size=(int)Math.pow(10,Math.ceil((Math.log10(size))));
-        array= new List[size];
+        this.size = (int) Math.pow(10, Math.ceil((Math.log10(size))));
+        array = new List[size];
 
     }
 
     @Override
     public void put(T value) { // makes a pair with the key and the value and adds it to the array
-        if(value==null){
+        if (value == null) {
             throw new IllegalArgumentException();
         }
 
@@ -33,8 +34,8 @@ public class LimitedHashTableImpl<T> implements LimitedHashTable<T> {
             chain.add(pair); // add the value to the list (it will be by itself)
             array[index] = chain; // make the list what the array points to
         } else { // there is a collision and a list already exists
-            for(T element:array[index]){
-                if(pair.equals(element)){
+            for (T element : array[index]) {
+                if (pair.equals(element)) {
                     throw new DuplicateKeyException();
                 }
             }
@@ -42,15 +43,17 @@ public class LimitedHashTableImpl<T> implements LimitedHashTable<T> {
 
         }
     }
-    private int hash(int key){
-        return HashFunction.hash(key,decimal,size);
+
+    private int hash(int key) {
+        return HashFunction.hash(key, decimal, size);
     }
+
     @Override
     public T get(T key) {
-        if(key==null){
+        if (key == null) {
             throw new IllegalArgumentException();
         }
-        List<T> list=array[hash(key.hashCode())]; //use the hash function to find where the value should be
+        List<T> list = array[hash(key.hashCode())]; //use the hash function to find where the value should be
         //and store this as list
 
         Node<T> currentNode;
@@ -63,24 +66,26 @@ public class LimitedHashTableImpl<T> implements LimitedHashTable<T> {
         }
         // if the program makes it to this point then there will be a chain
 
-        for(T thing:list){
-            if(thing.equals(key)){
+        for (T thing : list) {
+            if (thing.equals(key)) {
                 return thing;
             }
         }
         return null;
     }
+
     @Override
-    public boolean contains(T thing){
-        return get(thing)!=null;
+    public boolean contains(T thing) {
+        return get(thing) != null;
     }
+
     @Override
-    public void remove(T thing){
-        if(contains(thing)){
-            List<T> list=array[hash(thing.hashCode())];
+    public void remove(T thing) {
+        if (contains(thing)) {
+            List<T> list = array[hash(thing.hashCode())];
             list.remove(thing);
-            if(list.size()==0){
-                array[hash(thing.hashCode())]=null;
+            if (list.size() == 0) {
+                array[hash(thing.hashCode())] = null;
             }
         }
     }

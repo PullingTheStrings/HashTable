@@ -24,7 +24,6 @@ public class Hash_Impl<S, T> implements HashTable<S, T> {
     }
 
 
-
     @Override
     public void put(
             S key, T value) { // makes a pair with the key and the value and adds it to the array
@@ -115,7 +114,7 @@ public class Hash_Impl<S, T> implements HashTable<S, T> {
             for (S key : keySet) {
 
                 List<Pair<S, T>> list = array[hash(key.hashCode())];
-                int prevListSize=list.size();
+                int prevListSize = list.size();
                 //get the list of all the things that hashed to the same place as key
                 Pair<S, T> pair = new Pair(key, thing);
                 // this pair is what we will compare each element of the list to
@@ -126,11 +125,11 @@ public class Hash_Impl<S, T> implements HashTable<S, T> {
                         break;
                     }
                 }
-                if(list.size()==0){
-                    array[hash(key.hashCode())]=null; //We don't want a list of size 0
+                if (list.size() == 0) {
+                    array[hash(key.hashCode())] = null; //We don't want a list of size 0
 
-                }else{
-                    collisions=collisions-prevListSize+list.size();//updates the number of collisions
+                } else {
+                    collisions = collisions - prevListSize + list.size();//updates the number of collisions
                 }
 
 

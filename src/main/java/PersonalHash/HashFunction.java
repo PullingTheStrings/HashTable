@@ -1,9 +1,9 @@
 package PersonalHash;
 
 public class HashFunction {
-    static int hash(int key,double decimal,int size){
+    static int hash(int key, double decimal, int size) {
         double log = Math.log(Math.abs(key) + 1);
-        double m = Math.pow(10,decimal) * log - Math.floor(Math.pow(10,decimal) * log);
+        double m = Math.pow(10, decimal) * log - Math.floor(Math.pow(10, decimal) * log);
         // 1: take the absolute value of the number and add 1
         // 2:take the log of this number
         // 3: move the decimal point <decimal> spots to the right
